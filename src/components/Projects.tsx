@@ -5,26 +5,25 @@ import { projects, statusMeta } from "@/data/projects";
 
 export default function Projects() {
   return (
-    <section id="proyectos" className="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6">
-      <div className="flex items-end justify-between gap-4">
+    <section id="proyectos" className="section-shell section-space border-t border-[var(--line)]">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">Proyectos</h2>
-          <p className="mt-1 text-sm text-zinc-500">
-            3 espacios reservados. Subo mi tesis y 2 proyectos de apoyo — la estructura ya está lista.
-          </p>
+          <p className="section-label">Trabajo seleccionado</p>
+          <h2 className="section-title">Proyectos que convierten problemas en interfaces.</h2>
         </div>
+        <p className="max-w-sm text-sm leading-6 text-[var(--muted)]">Una selección en crecimiento: tesis aplicada, backend y producto frontend.</p>
       </div>
-      <div className="mt-6 grid gap-4 md:grid-cols-3">
+      <div className="mt-10 grid gap-4 md:grid-cols-3">
         {projects.map((p) => {
           const meta = statusMeta[p.estado];
           const listo = p.estado === "completo";
           return (
             <article
               key={p.slug}
-              className={`flex flex-col rounded-2xl border p-5 transition-shadow ${
+              className={`flex flex-col rounded-[1.25rem] border p-6 transition duration-200 hover:-translate-y-1 ${
                 p.destacado
-                  ? "border-zinc-900 bg-zinc-900 text-white dark:border-white dark:bg-white dark:text-black"
-                  : "border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950"
+                  ? "border-[#a7ce51] bg-[#c9f36a] text-[#171717]"
+                  : "border-[var(--line)] bg-transparent"
               }`}
             >
               <span
@@ -34,9 +33,9 @@ export default function Projects() {
               >
                 {meta.label}
               </span>
-              <h3 className="mt-3 font-bold">{p.titulo}</h3>
-              <p className={`text-xs ${p.destacado ? "opacity-70" : "text-zinc-500"}`}>{p.subtitulo}</p>
-              <p className={`mt-2 text-sm leading-6 ${p.destacado ? "opacity-90" : "text-zinc-600 dark:text-zinc-400"}`}>
+              <h3 className="mt-5 text-lg font-bold tracking-tight">{p.titulo}</h3>
+              <p className={`mt-1 text-xs ${p.destacado ? "opacity-70" : "text-[var(--muted)]"}`}>{p.subtitulo}</p>
+              <p className={`mt-4 text-sm leading-6 ${p.destacado ? "opacity-80" : "text-[var(--muted)]"}`}>
                 {p.descripcion}
               </p>
               <div className="mt-3 flex flex-wrap gap-1.5">
@@ -45,8 +44,8 @@ export default function Projects() {
                     key={t}
                     className={`rounded-full px-2 py-0.5 text-xs font-medium ${
                       p.destacado
-                        ? "bg-white/15 dark:bg-black/10"
-                        : "bg-zinc-100 text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
+                        ? "bg-black/10 text-[#171717]"
+                        : "bg-black/5 text-[var(--muted)] dark:bg-white/5"
                     }`}
                   >
                     {t}
@@ -86,10 +85,8 @@ export default function Projects() {
           );
         })}
       </div>
-      <p className="mt-4 rounded-xl bg-zinc-50 p-3 text-xs leading-5 text-zinc-500 dark:bg-zinc-900 dark:text-zinc-400">
-        ¿Cómo agrego un proyecto? Sube el repo a GitHub → abre <code>src/data/projects.ts</code> → pega
-        <code> githubUrl</code> y <code>demoUrl</code> → cambia <code>estado</code> a
-        <code> &quot;completo&quot;</code>. Sin tocar diseño.
+      <p className="mt-5 text-xs leading-5 text-[var(--muted)]">
+        Los proyectos pueden ampliarse desde <code className="rounded bg-black/5 px-1.5 py-0.5 dark:bg-white/5">src/data/projects.ts</code> sin tocar la presentación.
       </p>
     </section>
   );
